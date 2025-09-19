@@ -2,7 +2,7 @@
 import { productos } from "../js/data.js";
 
 // 2. Seleccionar el contenedor principal
-const contenedorCatalogo = document.getElementById("catalogo");
+const contenedorCatalogo = document.getElementById("gridProductos");
 const contenedorFiltros = document.getElementById("filtros");
 
 // 3. Renderizar productos
