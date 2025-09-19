@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title> Inicio | Droopy Pet Shop </title>
+    <link rel="icon" href="../assets/img/PetStoreShop.ico">
+    <link rel="stylesheet" href="../assets/img/estilosindex.css">
+</head>
+
+<body>
+    <!-- header común -->
+    <header>
+        <h1>Droopy Pet Shop</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="../productos.html">Productos</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+    <h1>Catálogo</h1>
+
+        <div class="toolbar">
+            <label for="filtroCategoria">Categoría:</label>
+                <select id="filtroCategoria">
+                    <!-- Se completa por JS -->
+                </select>
+            <span id="contador"></span>
+        </div>
+
+    <div id="gridProductos"></div>
+    
+    </main>
+    <!-- footer común -->
+    <footer>
+        <p>&copy; 2020-2025 Droopy Pet Shop</p>
+    </footer>
+
+    <script type="module" src="../js/catalogo.js"></script>
+</body>
+
+</html>
