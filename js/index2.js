@@ -3,7 +3,7 @@ import { productos } from "./data.js";
 function tomarAleatorios(arr, n = 3) {
   const src = [...arr];
 
-  const enStock = src.filter(p => p.stock > 0);
+  const enStock = src.filter((p) => p.stock > 0);
   const base = enStock.length >= n ? enStock : src;
 
   for (let i = base.length - 1; i > 0; i--) {
@@ -21,7 +21,9 @@ function cardDestacado(p) {
     <div class="body">
       <h3>${p.nombre}</h3>
       <p class="precio">$ ${p.precio.toLocaleString("es-AR")}</p>
-      <a class="btn-detalle" href="./pages/producto.html?id=${p.id}" aria-label="Ver detalles de ${p.nombre}">
+      <a class="btn-detalle" href="./pages/producto.html?id=${
+        p.id
+      }" aria-label="Ver detalles de ${p.nombre}">
         Ver detalles
       </a>
     </div>
@@ -35,7 +37,7 @@ function initIndex() {
 
   const destacados = tomarAleatorios(productos, 3);
   cont.innerHTML = "";
-  destacados.forEach(p => cont.appendChild(cardDestacado(p)));
+  destacados.forEach((p) => cont.appendChild(cardDestacado(p)));
 }
 
 document.addEventListener("DOMContentLoaded", initIndex);

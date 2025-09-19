@@ -6,7 +6,7 @@ const params = new URLSearchParams(window.location.search);
 const id = parseInt(params.get("id"));
 
 // Busca el producto en el array
-let producto = productos.find(p => p.id === id);
+let producto = productos.find((p) => p.id === id);
 
 // Selecciona el contenedor del detalle
 const contenedorDetalle = document.getElementById("detalle");
