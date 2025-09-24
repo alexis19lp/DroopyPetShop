@@ -38,4 +38,45 @@ export const productos = [
     stock: 15,
     img: "../assets/img/comedero-doble.jpg",
   },
+
+    {
+    id: 5,
+    nombre: "Comedero doble",
+    descripcion: "Comedero con doble stack para comida y bebida.",
+    categoria: "Alimentacion",
+    precio: 15000,
+    stock: 15,
+    img: "../assets/img/comedero-doble.jpg",
+  },
+
+  {
+    id: 6,
+    nombre: "Comedero doble",
+    descripcion: "Comedero con doble stack para comida y bebida.",
+    categoria: "Alimentacion",
+    precio: 15000,
+    stock: 15,
+    img: "../assets/img/comedero-doble.jpg",
+  },
+
+  {
+    id: 7,
+    nombre: "Comedero doble",
+    descripcion: "Comedero con doble stack para comida y bebida.",
+    categoria: "Alimentacion",
+    precio: 15000,
+    stock: 15,
+    img: "../assets/img/comedero-doble.jpg",
+  },
+
+  {
+    id: 8,
+    nombre: "Comedero doble",
+    descripcion: "Comedero con doble stack para comida y bebida.",
+    categoria: "Alimentacion",
+    precio: 15000,
+    stock: 15,
+    img: "../assets/img/comedero-doble.jpg",
+  },
 ];
+
