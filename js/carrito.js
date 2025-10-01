@@ -13,16 +13,16 @@
 */
 
 function ensureCartButton() {
-  const nav = document.getElementById("cart")
+  const nav = document.getElementById("cart");
   if (!nav) return;
 
   let link = nav.querySelector(".cart-link");
   if (!link) {
     link = document.createElement("a");
-    link.href = "#";
+    link.href = "../pages/carrito.html";
     link.className = "cart-link";
     link.setAttribute("aria-label", "Carrito");
-   link.innerHTML = `
+    link.innerHTML = `
    
       <span class="cart-ico" aria-hidden="true">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
@@ -53,8 +53,8 @@ function updateBadge(n, animate = true) {
     // 1) Quitamos la clase "bump" para “resetear” la animación
     badge.classList.remove("bump");
 
-    // 2) Leemos badge.offsetWidth 
-    // El .offsetWidth es un truco para que el navegador se olvide de la animación pasada 
+    // 2) Leemos badge.offsetWidth
+    // El .offsetWidth es un truco para que el navegador se olvide de la animación pasada
     // y la vuelva a correr cada vez que cambia el número.
     badge.offsetWidth;
 
