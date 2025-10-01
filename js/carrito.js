@@ -1,16 +1,19 @@
-/* Funcion ensureCartButton
-1-Buscar <nav>.
+// funcion para guardar el elemento en el localStorage
+export function guardarEnLocalStorage(clave, valor) {
+  localStorage.setItem(clave, JSON.stringify(valor));
+  console.log("Guardado en localStorage:", clave, valor);
+}
 
-2-Ver si ya hay un botón de carrito.
+// funcion para recuperar el elemento del localStorage
+export function recuperarDelLocalStorage(clave) {
+  const valor = localStorage.getItem(clave);
+  return valor ? JSON.parse(valor) : null;
+}
 
-3-Si no existe → crear un <a> con:
-
-    -Ícono (SVG)
-
-    -Badge (<span>) con número
-
-4-Agregarlo al nav.
-*/
+// funcion para eliminar el elemento del localStorage
+export function eliminarDelLocalStorage(clave) {
+  localStorage.removeItem(clave);
+}
 
 function ensureCartButton() {
   const nav = document.getElementById("cart");

@@ -1,5 +1,6 @@
 // Importa los productos
 import { productos } from "./data.js";
+import { guardarEnLocalStorage } from "./carrito.js";
 
 // Selecciona los 3 productos
 const productosDestacados = productos.slice(0, 3);
@@ -7,10 +8,8 @@ const productosDestacados = productos.slice(0, 3);
 // Selecciona el contenedor donde se van a renderizar
 const contenedorDestacados = document.getElementById("destacados");
 
-// Función para renderizar productos
 function renderProductos(lista) {
   lista.forEach((prod) => {
-    // Crea la tarjeta
     const card = document.createElement("div");
     card.classList.add("card");
 
@@ -22,7 +21,11 @@ function renderProductos(lista) {
       <button class="btn-agregar">Agregar al carrito</button>
     `;
 
-    // Agrega al contenedor
+    const btnAgregar = card.querySelector(".btn-agregar");
+    btnAgregar.addEventListener("click", () => {
+      guardarEnLocalStorage(prod.id, prod);
+    });
+
     contenedorDestacados.appendChild(card);
   });
 }
