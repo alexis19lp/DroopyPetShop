@@ -1,4 +1,5 @@
 // funcion para guardar el elemento en el localStorage
+// TODO: la clave va a ser siempre "carrito" y el valor es el listado de productos
 export function guardarEnLocalStorage(clave, valor) {
   localStorage.setItem(clave, JSON.stringify(valor));
   console.log("Guardado en localStorage:", clave, valor);
@@ -19,16 +20,24 @@ export function eliminarDelLocalStorage(clave) {
 const contenedorCarrito = document.getElementById("resumenCarrito");
 
 // Renderiza el listado del carrito del localStorage
+// Todo: recuperar el listado del localStorage debe ser el key "carrito"
 const carrito = recuperarDelLocalStorage(1) || [];
 
 function renderCarrito() {
   if (!contenedorCarrito) return;
 
+  if (carrito.length === 0) {
+    contenedorCarrito.innerHTML = "<p>El carrito está vacío.</p>";
+    return;
+  }
+
+  // todo: recorrer el array del carrito y mostrar cada producto
+  // Por ahora solo mostramos el primer producto para probar
+  const producto = carrito[0];
   contenedorCarrito.innerHTML = `
-  <h2>Carrito de Compras</h2>
   <ul>
       <li>
-        <img src="${carrito.img}" alt="${carrito.nombre}" width="50">
+        <img src="${carrito.img}" alt="Imagen producto" width="50">
         <span>${carrito.nombre} - $${carrito.precio}</span>
       </li>
   </ul>

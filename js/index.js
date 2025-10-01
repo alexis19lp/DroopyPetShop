@@ -2,6 +2,9 @@
 import { productos } from "./data.js";
 import { guardarEnLocalStorage } from "./carrito.js";
 
+// Array de carritos
+const carrito = [];
+
 // Selecciona los 3 productos
 const productosDestacados = productos.slice(0, 3);
 
