@@ -15,6 +15,27 @@ export function eliminarDelLocalStorage(clave) {
   localStorage.removeItem(clave);
 }
 
+// Selecciona contenedor donde se va a mostar el listado del carrito.
+const contenedorCarrito = document.getElementById("resumenCarrito");
+
+// Renderiza el listado del carrito del localStorage
+const carrito = recuperarDelLocalStorage(1) || [];
+
+function renderCarrito() {
+  if (!contenedorCarrito) return;
+
+  contenedorCarrito.innerHTML = `
+  <h2>Carrito de Compras</h2>
+  <ul>
+      <li>
+        <img src="${carrito.img}" alt="${carrito.nombre}" width="50">
+        <span>${carrito.nombre} - $${carrito.precio}</span>
+      </li>
+  </ul>
+  <p>
+  `;
+}
+
 function ensureCartButton() {
   const nav = document.getElementById("cart");
   if (!nav) return;
@@ -70,6 +91,7 @@ function updateBadge(n, animate = true) {
 
 document.addEventListener("DOMContentLoaded", () => {
   ensureCartButton();
+  renderCarrito();
 
   let contador = 0;
   const btn = document.getElementById("btnSumar");
