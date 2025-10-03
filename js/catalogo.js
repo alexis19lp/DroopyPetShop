@@ -57,6 +57,7 @@ function renderFiltros() {
   // Evento de filtrado
   contenedorFiltros.addEventListener("change", (e) => {
     const categoria = e.target.value;
+    localStorage.setItem("categoria", categoria);
     if (categoria === "Todos") {
       renderProductos(productos);
     } else {
@@ -67,5 +68,26 @@ function renderFiltros() {
 }
 
 // 5. Inicialización
-renderProductos(productos);
-renderFiltros();
+function inicializarCatalogo() {
+  renderFiltros();
+
+  const categoriaGuardada = localStorage.getItem("categoria");
+
+  if (categoriaGuardada) {
+    contenedorFiltros.value = categoriaGuardada;
+
+    if (categoriaGuardada === "Todos") {
+      renderProductos(productos);
+    } else {
+      const filtrados = productos.filter(
+        (p) => p.categoria === categoriaGuardada
+      );
+      renderProductos(filtrados);
+    }
+  } else {
+    renderProductos(productos);
+  }
+}
+
+// 6. Inicialización
+inicializarCatalogo();
