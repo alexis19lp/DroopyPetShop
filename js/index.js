@@ -1,11 +1,11 @@
 // Importa los productos
 import { productos } from "./data.js";
-import { guardarEnCarritoLocalStorage } from "./carrito.js";
+import {
+  guardarEnCarritoLocalStorage,
+  updateBadge,
+  recuperaCarritoDelLocalStorage,
+} from "./carrito.js";
 
-// Array de carritos
-const carrito = [];
-
-// Selecciona los 3 productos
 const productosDestacados = productos.slice(0, 3);
 
 // Selecciona el contenedor donde se van a renderizar
@@ -29,6 +29,7 @@ function renderProductos(lista) {
     const btnAgregar = card.querySelector(".btn-agregar");
     btnAgregar.addEventListener("click", () => {
       guardarEnCarritoLocalStorage(prod);
+      updateBadge(recuperaCarritoDelLocalStorage().length, true);
     });
 
     contenedorDestacados.appendChild(card);

@@ -71,7 +71,7 @@ function ensureCartButton() {
   }
 }
 
-function updateBadge(n, animate = true) {
+export function updateBadge(n, animate = true) {
   // Buscamos el elemento con id="carritoCount" (el numerito rojo)
   const badge = document.getElementById("carritoCount");
 
@@ -102,10 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ensureCartButton();
   renderCarrito();
 
-  let contador = 0;
-  const btn = document.getElementById("btnSumar");
-  btn.addEventListener("click", () => {
-    contador++;
-    updateBadge(contador, true);
-  });
+  const carrito = recuperaCarritoDelLocalStorage();
+
+  updateBadge(carrito.length, true);
 });
