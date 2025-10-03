@@ -43,8 +43,8 @@ function renderDetalle() {
       <p><strong>Categoría:</strong> ${producto.categoria}</p>
       <p><strong>Precio:</strong> $${producto.precio}</p>
       <p><strong>Stock disponible:</strong> ${stockDisponible}</p>
-      <button id="btnCarrito" ${stockDisponible === 0 ? "disabled" : ""}>
-        Agregar al carrito
+      <button id="btnCarrito" ${stockDisponible < 1 ? "disabled" : ""}>
+        Agregar al carrito ${stockDisponible < 1 ? " (Stock agotado)" : ""}
       </button>
     </div>
   `;

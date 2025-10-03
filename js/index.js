@@ -11,8 +11,17 @@ const productosDestacados = productos.slice(0, 3);
 // Selecciona el contenedor donde se van a renderizar
 const contenedorDestacados = document.getElementById("destacados");
 
+const calcularStockDisponible = (producto) => {
+  const carrito = recuperaCarritoDelLocalStorage();
+  const cantidadEnCarrito = carrito.filter((p) => p.id === producto.id).length;
+  return producto.stock - cantidadEnCarrito;
+};
+
 function renderProductos(lista) {
   lista.forEach((prod) => {
+    // Calcular stock disponible
+    const stockDisponible = calcularStockDisponible(prod);
+
     const card = document.createElement("div");
     card.classList.add("card");
 
@@ -22,7 +31,11 @@ function renderProductos(lista) {
       <h3 class="card-title">${prod.nombre}</h3>
       <p class="card-desc">${prod.descripcion}</p>
       <p class="card-price">$${prod.precio}</p>
-      <button class="btn-agregar">Agregar al carrito</button>
+      <button class="btn-agregar" ${
+        stockDisponible < 1 ? "disabled" : ""
+      }>Agregar al carrito ${
+      stockDisponible < 1 ? " (Stock agotado)" : ""
+    }</button>
     `;
 
     // boton para agregar al carrito
