@@ -43,7 +43,12 @@ function renderCarrito() {
     contenedorCarrito.innerHTML += `
       <div class="productoCarrito">
       <img src="${producto.img}" alt="Imagen producto" width="50">
-      <span>${producto.nombre} - $${producto.precio}</span>
+      <span>${producto.nombre}</span>
+      <span>ID: ${producto.id}</span>
+
+      </div>
+      <div class="precioCarrito">
+        <span>${producto.precio}</span>
       </div>
       <div class="cantidadCarrito">
         <span>${producto.cantidad}</span>
