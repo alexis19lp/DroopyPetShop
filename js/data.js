@@ -1,82 +1,90 @@
 export const productos = [
   {
     id: 1,
-    nombre: "Bolsa Comida Perros KONGO",
-    descripcion: "Alimento balanceado con carne, pollo y vegetales.",
-    categoria: "Alimentacion",
-    precio: 20000,
-    stock: 10,
-    img: "../assets/img/kongo-20kg.webp",
+    nombre: "Transportadora Plástica Mediana",
+    descripcion: "Ideal para viajes cortos con perros o gatos.",
+    categoria: "Accesorios",
+    precio: 22000,
+    stock: 7,
+    img:"../assets/img/id1.jpg",
+
   },
 
   {
     id: 2,
-    nombre: "Piedras sanitarias",
-    descripcion: "Ideal para las necesidades de tu gato",
-    categoria: "Salud",
-    precio: 5000,
-    stock: 12,
-    img: "../assets/img/absorsol-premium.webp",
+    nombre: "Bolsa Comida Gatos WHISKAS",
+    descripcion: "Alimento con sabor a carne y leche.",
+    categoria: "Alimentacion",
+    precio: 15000,
+    stock: 15,
+    img: "../assets/img/id2.jpg",
+
   },
 
   {
     id: 3,
-    nombre: "Pipeta antiparasitaria - Perros",
-    descripcion: "Tratamiento y prevención contra pulgas, garrapatas, etc.",
-    categoria: "Salud",
-    precio: 3000,
-    stock: 10,
-    img: "../assets/img/pipetas-parasitarias.png",
+    nombre: "Juguete Mordedor para Perros",
+    descripcion: "Juguete de goma hueso pelota.",
+    categoria: "Juguetes",
+    precio: 3500,
+    stock: 25,
+    img: "../assets/img/id3.jpg",
+
   },
 
   {
     id: 4,
-    nombre: "Comedero doble",
-    descripcion: "Comedero con doble stack para comida y bebida.",
-    categoria: "Alimentacion",
-    precio: 15000,
-    stock: 15,
-    img: "../assets/img/comedero-doble.jpg",
+    nombre: "Arena Sanitaria Gatos AGILITY",
+    descripcion: "Arena absorbente con control de olores.",
+    categoria: "Higiene",
+    precio: 8000,
+    stock: 12,
+    img: "../assets/img/id4.jpg",
+
   },
 
-    {
+  {
     id: 5,
-    nombre: "Comedero doble",
-    descripcion: "Comedero con doble stack para comida y bebida.",
-    categoria: "Alimentacion",
-    precio: 15000,
-    stock: 15,
-    img: "../assets/img/comedero-doble.jpg",
+    nombre: "Collar Ajustable para Perros",
+    descripcion: "Collar de nylon con hebilla metálica.",
+    categoria: "Accesorios",
+    precio: 4200,
+    stock: 20,
+    img: "../assets/img/id5.jpg",
+
   },
 
   {
     id: 6,
-    nombre: "Comedero doble",
-    descripcion: "Comedero con doble stack para comida y bebida.",
-    categoria: "Alimentacion",
-    precio: 15000,
-    stock: 15,
-    img: "../assets/img/comedero-doble.jpg",
+    nombre: "Shampoo para Perros PIEL SANA",
+    descripcion: "Shampoo hipoalergénico con aloe vera.",
+    categoria: "Higiene",
+    precio: 5600,
+    stock: 18,
+    img: "../assets/img/id6.jpg",
+
   },
 
   {
     id: 7,
-    nombre: "Comedero doble",
-    descripcion: "Comedero con doble stack para comida y bebida.",
-    categoria: "Alimentacion",
-    precio: 15000,
-    stock: 15,
-    img: "../assets/img/comedero-doble.jpg",
+    nombre: "Comedero Doble Acero Inoxidable",
+    descripcion: "Comedero doble para agua y alimento.",
+    categoria: "Accesorios",
+    precio: 6900,
+    stock: 10,
+    img: "../assets/img/id7.jpg",
+
   },
 
   {
     id: 8,
-    nombre: "Comedero doble",
-    descripcion: "Comedero con doble stack para comida y bebida.",
+    nombre: "Bolsa Comida Cachorros DOG CHOW",
+    descripcion: "Alimento premium para cachorros con DHA.",
     categoria: "Alimentacion",
-    precio: 15000,
-    stock: 15,
-    img: "../assets/img/comedero-doble.jpg",
+    precio: 18500,
+    stock: 14,
+    img: "../assets/img/id8.webp",
+
   },
 ];
 
