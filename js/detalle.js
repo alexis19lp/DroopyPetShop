@@ -1,5 +1,10 @@
-// Importa productos
+// Importa productos y funciones del carrito
 import { productos } from "./data.js";
+import {
+  guardarEnCarritoLocalStorage,
+  updateBadge,
+  recuperaCarritoDelLocalStorage,
+} from "./carrito.js";
 
 // Obtiene el parámetro id desde la URL
 const params = new URLSearchParams(window.location.search);
@@ -18,6 +23,18 @@ function renderDetalle() {
     return;
   }
 
+  // Función para calcular el stock disponible restando los elementos del carrito
+  const calcularStockDisponible = (producto) => {
+    const carrito = recuperaCarritoDelLocalStorage();
+    const cantidadEnCarrito = carrito.filter(
+      (p) => p.id === producto.id
+    ).length;
+    return producto.stock - cantidadEnCarrito;
+  };
+
+  // Calcular stock disponible
+  const stockDisponible = calcularStockDisponible(producto);
+
   contenedorDetalle.innerHTML = `
     <div class="detalle-card">
       <img src="${producto.img}" alt="${producto.nombre}" class="detalle-img">
@@ -25,8 +42,8 @@ function renderDetalle() {
       <p class="detalle-desc">${producto.descripcion}</p>
       <p><strong>Categoría:</strong> ${producto.categoria}</p>
       <p><strong>Precio:</strong> $${producto.precio}</p>
-      <p><strong>Stock:</strong> ${producto.stock}</p>
-      <button id="btnCarrito" ${producto.stock === 0 ? "disabled" : ""}>
+      <p><strong>Stock disponible:</strong> ${stockDisponible}</p>
+      <button id="btnCarrito" ${stockDisponible === 0 ? "disabled" : ""}>
         Agregar al carrito
       </button>
     </div>
@@ -36,9 +53,22 @@ function renderDetalle() {
   const btnCarrito = document.getElementById("btnCarrito");
   if (btnCarrito) {
     btnCarrito.addEventListener("click", () => {
-      if (producto.stock > 0) {
-        producto.stock -= 1;
-        renderDetalle(); // volver a renderizar para actualizar stock
+      if (stockDisponible > 0) {
+        // Crear objeto para el carrito con cantidad 1
+        const productoCarrito = {
+          ...producto,
+          cantidad: 1,
+        };
+
+        // Guardar en el carrito
+        guardarEnCarritoLocalStorage(productoCarrito);
+
+        // Actualizar badge del carrito
+        const carrito = recuperaCarritoDelLocalStorage();
+        updateBadge(carrito.length);
+
+        // Volver a renderizar para actualizar stock
+        renderDetalle();
       }
     });
   }
