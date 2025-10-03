@@ -1,6 +1,6 @@
 // Importa los productos
 import { productos } from "./data.js";
-import { guardarEnLocalStorage } from "./carrito.js";
+import { guardarEnCarritoLocalStorage } from "./carrito.js";
 
 // Array de carritos
 const carrito = [];
@@ -17,6 +17,7 @@ function renderProductos(lista) {
     card.classList.add("card");
 
     card.innerHTML = `
+        
       <img src="${prod.img}" alt="${prod.nombre}" class="card-img">
       <h3 class="card-title">${prod.nombre}</h3>
       <p class="card-desc">${prod.descripcion}</p>
@@ -24,9 +25,10 @@ function renderProductos(lista) {
       <button class="btn-agregar">Agregar al carrito</button>
     `;
 
+    // boton para agregar al carrito
     const btnAgregar = card.querySelector(".btn-agregar");
     btnAgregar.addEventListener("click", () => {
-      guardarEnLocalStorage(prod.id, prod);
+      guardarEnCarritoLocalStorage(prod);
     });
 
     contenedorDestacados.appendChild(card);
