@@ -26,8 +26,8 @@ function renderProductos(lista) {
   // Agregar eventos a los botones "Ver detalles"
   document.querySelectorAll(".btn-detalle").forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      const id = e.target.getAttribute("id");
-      window.location.href = "../producto.html?id=XYZ";
+      const id = e.target.getAttribute("data-id");
+      window.location.href = `./detalle.html?id=${id}`;
     });
   });
 }
@@ -37,28 +37,32 @@ function renderFiltros() {
   // Obtener categorías únicas
   const categorias = [...new Set(productos.map((p) => p.categoria))];
 
-  // Agregar botón "Todos"
-  contenedorFiltros.innerHTML = `<button class="btn-filtro" data-cat="Todos">Todos</button>`;
+  // Limpiar el select
+  contenedorFiltros.innerHTML = "";
 
+  // Agregar opción "Todos"
+  const opcionTodos = document.createElement("option");
+  opcionTodos.value = "Todos";
+  opcionTodos.textContent = "Todos";
+  contenedorFiltros.appendChild(opcionTodos);
+
+  // Agregar opciones para cada categoría
   categorias.forEach((cat) => {
-    const btn = document.createElement("button");
-    btn.classList.add("btn-filtro");
-    btn.textContent = cat;
-    btn.setAttribute("data-cat", cat);
-    contenedorFiltros.appendChild(btn);
+    const opcion = document.createElement("option");
+    opcion.value = cat;
+    opcion.textContent = cat;
+    contenedorFiltros.appendChild(opcion);
   });
 
-  // Eventos de filtrado
-  document.querySelectorAll(".btn-filtro").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const categoria = btn.getAttribute("data-cat");
-      if (categoria === "Todos") {
-        renderProductos(productos);
-      } else {
-        const filtrados = productos.filter((p) => p.categoria === categoria);
-        renderProductos(filtrados);
-      }
-    });
+  // Evento de filtrado
+  contenedorFiltros.addEventListener("change", (e) => {
+    const categoria = e.target.value;
+    if (categoria === "Todos") {
+      renderProductos(productos);
+    } else {
+      const filtrados = productos.filter((p) => p.categoria === categoria);
+      renderProductos(filtrados);
+    }
   });
 }
 

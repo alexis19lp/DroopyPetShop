@@ -1,19 +1,16 @@
 // funcion para guardar el elemento en el localStorage
 // TODO: la clave va a ser siempre "carrito" y el valor es el listado de productos
-export function guardarEnLocalStorage(clave, valor) {
-  localStorage.setItem(clave, JSON.stringify(valor));
-  console.log("Guardado en localStorage:", clave, valor);
+export function guardarEnCarritoLocalStorage(valor) {
+  const carrito = recuperaCarritoDelLocalStorage() || [];
+  carrito.push(valor);
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  console.log("Guardado en Carrito Local Storage:", valor);
 }
 
-// funcion para recuperar el elemento del localStorage
-export function recuperarDelLocalStorage(clave) {
-  const valor = localStorage.getItem(clave);
-  return valor ? JSON.parse(valor) : null;
-}
-
-// funcion para eliminar el elemento del localStorage
-export function eliminarDelLocalStorage(clave) {
-  localStorage.removeItem(clave);
+// funcion para recuperar carrito del localStorage
+export function recuperaCarritoDelLocalStorage() {
+  const carrito = localStorage.getItem("carrito");
+  return carrito ? JSON.parse(carrito) : [];
 }
 
 // Selecciona contenedor donde se va a mostar el listado del carrito.
@@ -21,28 +18,31 @@ const contenedorCarrito = document.getElementById("resumenCarrito");
 
 // Renderiza el listado del carrito del localStorage
 // Todo: recuperar el listado del localStorage debe ser el key "carrito"
-const carrito = recuperarDelLocalStorage(1) || [];
-
 function renderCarrito() {
+  const carrito = recuperaCarritoDelLocalStorage();
   if (!contenedorCarrito) return;
 
   if (carrito.length === 0) {
     contenedorCarrito.innerHTML = "<p>El carrito está vacío.</p>";
     return;
   }
-
-  // todo: recorrer el array del carrito y mostrar cada producto
-  // Por ahora solo mostramos el primer producto para probar
-  const producto = carrito[0];
-  contenedorCarrito.innerHTML = `
-  <ul>
-      <li>
-        <img src="${carrito.img}" alt="Imagen producto" width="50">
-        <span>${carrito.nombre} - $${carrito.precio}</span>
-      </li>
-  </ul>
-  <p>
-  `;
+  carrito.forEach((producto) => {
+    contenedorCarrito.innerHTML += `
+      <div class="productoCarrito">
+      <img src="${producto.img}" alt="Imagen producto" width="50">
+      <span>${producto.nombre} - $${producto.precio}</span>
+      </div>
+      <div class="cantidadCarrito">
+        <span>${producto.cantidad}</span>
+      </div>
+      <div class="subtotalCarrito">
+        <span>${producto.precio * producto.cantidad}</span>
+      </div>
+      <div class="eliminarCarrito">
+        <span>Eliminar</span>
+      </div>
+    `;
+  });
 }
 
 function ensureCartButton() {
@@ -71,7 +71,7 @@ function ensureCartButton() {
   }
 }
 
-function updateBadge(n, animate = true) {
+export function updateBadge(n, animate = true) {
   // Buscamos el elemento con id="carritoCount" (el numerito rojo)
   const badge = document.getElementById("carritoCount");
 
@@ -102,10 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ensureCartButton();
   renderCarrito();
 
-  let contador = 0;
-  const btn = document.getElementById("btnSumar");
-  btn.addEventListener("click", () => {
-    contador++;
-    updateBadge(contador, true);
-  });
+  const carrito = recuperaCarritoDelLocalStorage();
+
+  updateBadge(carrito.length, true);
 });

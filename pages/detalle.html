@@ -2,41 +2,34 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Inicio | Droopy Pet Shop</title>
+    <title>Detalle del Producto | Droopy Pet Shop</title>
     <link rel="icon" href="../assets/img/PetStoreShop.ico" />
     <link rel="stylesheet" href="../assets/img/estilosindex.css" />
   </head>
 
+  <body>
     <!-- header común -->
     <header>
       <h1>Droopy Pet Shop</h1>
       <nav>
         <ul>
           <li><a href="../index.html">Inicio</a></li>
-          <li><a href="./productos.html">Productos</a></li>     
+          <li><a href="./productos.html">Productos</a></li>
         </ul>
         <div id="cart" class="cart"></div>
       </nav>
     </header>
 
     <main>
-      <h1>Catálogo</h1>
-      <div class="toolbar">
-        <label for="filtroCategoria">Categoría:</label>
-        <select id="filtroCategoria">
-          <!-- Se completa por JS -->
-        </select>
-        <span id="contador"></span>
-      </div>
-
-      <div id="gridProductos"></div>
+      <div id="detalle"></div>
     </main>
+
     <!-- footer común -->
     <footer>
       <p>&copy; 2020-2025 Droopy Pet Shop</p>
     </footer>
 
-    <script type="module" src="../js/catalogo.js"></script>
+    <script type="module" src="../js/detalle.js"></script>
     <script type="module" src="../js/carrito.js"></script>
   </body>
 </html>
