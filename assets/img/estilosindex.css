@@ -117,12 +117,14 @@ p {
   padding: 5px 5px;
   border-radius: 6px;
   color: white;
-  
 }
 
 .btn-agregar:hover {
   background-color: blue;
- 
+}
+
+.btn-agregar:disabled {
+  background-color:burlywood
 }
 
 .btn-detalle{
@@ -135,7 +137,6 @@ p {
 
 .btn-detalle:hover {
   background-color: blue;
- 
 }
 
 .tablaCarrito {
