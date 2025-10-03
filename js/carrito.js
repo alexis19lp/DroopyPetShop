@@ -51,8 +51,6 @@ function renderCarrito() {
       <div class="subtotalCarrito">
         <span>${producto.precio * producto.cantidad}</span>
       </div>
-      <div class="eliminarCarrito">
-        <span>Eliminar</span>
       </div>
     `;
   });
@@ -78,6 +76,11 @@ function renderResumen() {
     <p>Total de precio: ${totalPrecio}</p>
     <button>Seguir comprando</button>
   `;
+
+  const btnSeguirComprando = contenedorResumen.querySelector("button");
+  btnSeguirComprando.addEventListener("click", () => {
+    window.location.href = "../pages/productos.html";
+  });
 }
 
 function ensureCartButton() {
