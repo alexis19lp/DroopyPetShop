@@ -7,22 +7,24 @@
     <link rel="stylesheet" href="../assets/img/estilosindex.css" />
   </head>
 
-  <body>
+  <>
     <!-- header común -->
     <header>
       <h1>Droopy Pet Shop</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="./productos.html">Productos</a></li>     
+        </ul>
+        <div id="cart" class="cart">
+
+        </div>
+      </nav>
     </header>
 
-    <nav>
-      <ul>
-        <li><a href="../index.html">Inicio</a></li>
-        <li><a href="./productos.html">Productos</a></li>
-      </ul>
-    </nav>
-
     <main>
+      <button id="btnSumar">Sumar 1</button>
       <h1>Catálogo</h1>
-
       <div class="toolbar">
         <label for="filtroCategoria">Categoría:</label>
         <select id="filtroCategoria">
@@ -39,5 +41,6 @@
     </footer>
 
     <script type="module" src="../js/catalogo.js"></script>
+    <script type="module" src="../js/carrito.js"></script>
   </body>
 </html>

@@ -27,6 +27,7 @@ nav a {
   text-decoration: none;
   color: white;
   font-weight: bold;
+  
 }
 
 main {
@@ -47,4 +48,58 @@ footer {
 
 main .section {
   grid-template-columns: auto;
+}
+
+/* ---- Estilos del enlace del carrito en el nav ---- */
+.cart {
+  display: flex;
+}
+
+.cart-link {
+  position: relative;        /* permite posicionar elementos hijos (como el badge) relativos a este link */
+  display: inline-flex;      /* se comporta como inline, pero usa flexbox para alinear su contenido */
+  align-items: center;       /* centra verticalmente el ícono del carrito y el número */
+  gap: .4rem;                /* espacio horizontal entre el ícono y el badge */
+  margin-left: auto;         /* truco de flexbox: empuja el carrito a la derecha del nav */
+  color: rgb(21, 13, 13);              /* el SVG hereda este color porque usa fill="currentColor" */
+  text-decoration: none;     /* quita el subrayado de enlace */
+}
+
+/* ---- Contenedor del ícono (SVG del carrito) ---- */
+.cart-ico { 
+  display: inline-flex;      /* mantiene el ícono alineado en línea con el número */
+}
+
+/* ---- El badge (numerito rojo con cantidad) ---- */
+.cart-badge {
+  min-width: 20px;           /* ancho mínimo: asegura que siempre tenga forma de círculo */
+  height: 20px;              /* alto fijo: mantiene la altura consistente */
+  padding: 0 6px;            /* espacio horizontal extra: si hay 2 o 3 dígitos, no se aprieta */
+  border-radius: 999px;      /* valor enorme → genera forma circular/píldora */
+  font-size: 12px;           /* tamaño del número */
+  line-height: 20px;         /* centra verticalmente el número dentro del círculo */
+  text-align: center;        /* centra horizontalmente el número */
+  background: #e11d48;       /* color de fondo rojo */
+  color: #fff;               /* texto en blanco */
+  font-weight: 700;          /* número en negrita para que se note más */
+  display: inline-block;     /* se comporta como caja en línea */
+}
+
+/* ---- Cuando el badge recibe la clase .bump, corre la animación ---- */
+.cart-badge.bump {
+  animation: cart-bump 500ms ease-out; 
+  /* usa la animación "cart-bump"
+     - dura medio segundo (500ms)
+     - arranca fuerte y termina suave (ease-out) */
+}
+
+/* ---- Pasos de la animación del rebote ---- */ 
+/* los porcentajes representan en qué momento de la animación se aplica cada estilo.*/
+@keyframes cart-bump {
+  0%   { transform: scale(1); }     /* arranca en tamaño normal */
+  20%  { transform: scale(1.35); }  /* se infla bastante (35% más grande) */
+  40%  { transform: scale(0.8); }   /* se achica más de lo normal (rebote hacia abajo) */
+  60%  { transform: scale(1.2); }   /* rebote hacia arriba, no tan fuerte como el inicial */
+  80%  { transform: scale(0.9); }   /* segundo rebote hacia abajo más suave */
+  100% { transform: scale(1); }     /* vuelve al tamaño normal */
 }
