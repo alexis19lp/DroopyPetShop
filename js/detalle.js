@@ -36,14 +36,14 @@ function renderDetalle() {
   const stockDisponible = calcularStockDisponible(producto);
 
   contenedorDetalle.innerHTML = `
-    <div class="detalle-card">
-      <img src="${producto.img}" alt="${producto.nombre}" class="detalle-img">
+    <div class="card">
+      <img src="${producto.img}" alt="${producto.nombre}" class="card-img">
       <h2 class="detalle-title">${producto.nombre}</h2>
       <p class="detalle-desc">${producto.descripcion}</p>
       <p><strong>Categoría:</strong> ${producto.categoria}</p>
       <p><strong>Precio:</strong> $${producto.precio}</p>
       <p><strong>Stock disponible:</strong> ${stockDisponible}</p>
-      <button id="btnCarrito" ${stockDisponible < 1 ? "disabled" : ""}>
+      <button id="btnCarrito" class="btn-agregar" ${stockDisponible < 1 ? "disabled" : ""}>
         Agregar al carrito ${stockDisponible < 1 ? " (Stock agotado)" : ""}
       </button>
     </div>
