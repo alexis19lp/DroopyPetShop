@@ -55,13 +55,9 @@ function renderDetalle() {
     btnCarrito.addEventListener("click", () => {
       if (stockDisponible > 0) {
         // Crear objeto para el carrito con cantidad 1
-        const productoCarrito = {
-          ...producto,
-          cantidad: 1,
-        };
 
         // Guardar en el carrito
-        guardarEnCarritoLocalStorage(productoCarrito);
+        guardarEnCarritoLocalStorage(producto);
 
         // Actualizar badge del carrito
         const carrito = recuperaCarritoDelLocalStorage();
