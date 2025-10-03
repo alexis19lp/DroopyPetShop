@@ -1,5 +1,4 @@
 // funcion para guardar el elemento en el localStorage
-// TODO: la clave va a ser siempre "carrito" y el valor es el listado de productos
 export function guardarEnCarritoLocalStorage(valor) {
   const carrito = recuperaCarritoDelLocalStorage() || [];
   carrito.push(valor);
@@ -14,10 +13,9 @@ export function recuperaCarritoDelLocalStorage() {
 }
 
 // Selecciona contenedor donde se va a mostar el listado del carrito.
-const contenedorCarrito = document.getElementById("resumenCarrito");
+const contenedorCarrito = document.getElementById("carritoProductos");
 
 // Renderiza el listado del carrito del localStorage
-// Todo: recuperar el listado del localStorage debe ser el key "carrito"
 function renderCarrito() {
   const carrito = recuperaCarritoDelLocalStorage();
   if (!contenedorCarrito) return;
@@ -26,11 +24,31 @@ function renderCarrito() {
     contenedorCarrito.innerHTML = "<p>El carrito está vacío.</p>";
     return;
   }
+
+  // Agrupar productos por ID y calcular cantidades usando Map
+  const productosAgrupados = new Map();
   carrito.forEach((producto) => {
+    if (productosAgrupados.has(producto.id)) {
+      productosAgrupados.get(producto.id).cantidad++;
+    } else {
+      productosAgrupados.set(producto.id, {
+        ...producto,
+        cantidad: 1,
+      });
+    }
+  });
+
+  // Renderizar productos agrupados
+  productosAgrupados.forEach((producto) => {
     contenedorCarrito.innerHTML += `
       <div class="productoCarrito">
       <img src="${producto.img}" alt="Imagen producto" width="50">
-      <span>${producto.nombre} - $${producto.precio}</span>
+      <span>${producto.nombre}</span>
+      <span>ID: ${producto.id}</span>
+
+      </div>
+      <div class="precioCarrito">
+        <span>${producto.precio}</span>
       </div>
       <div class="cantidadCarrito">
         <span>${producto.cantidad}</span>
@@ -38,10 +56,35 @@ function renderCarrito() {
       <div class="subtotalCarrito">
         <span>${producto.precio * producto.cantidad}</span>
       </div>
-      <div class="eliminarCarrito">
-        <span>Eliminar</span>
       </div>
     `;
+  });
+}
+
+//// Selecciona contenedor donde se va a mostar el resumen del carrito.
+const contenedorResumen = document.getElementById("resumenCarrito");
+
+// Funcion para mostrar un resumen del carrito con un total de productos y un total de precio con un boton para seguir comprando.
+function renderResumen() {
+  const carrito = recuperaCarritoDelLocalStorage();
+  if (!contenedorResumen) return;
+
+  const totalProductos = carrito.length;
+  const totalPrecio = carrito.reduce(
+    (total, producto) => total + producto.precio,
+    0
+  );
+
+  contenedorResumen.innerHTML = `
+    <h2>Resumen</h2>
+    <p>Total de productos: ${totalProductos}</p>
+    <p>Total de precio: ${totalPrecio}</p>
+    <button>Seguir comprando</button>
+  `;
+
+  const btnSeguirComprando = contenedorResumen.querySelector("button");
+  btnSeguirComprando.addEventListener("click", () => {
+    window.location.href = "../pages/productos.html";
   });
 }
 
@@ -101,7 +144,7 @@ export function updateBadge(n, animate = true) {
 document.addEventListener("DOMContentLoaded", () => {
   ensureCartButton();
   renderCarrito();
-
+  renderResumen();
   const carrito = recuperaCarritoDelLocalStorage();
 
   updateBadge(carrito.length, true);
