@@ -6,41 +6,36 @@
     <link rel="icon" href="../assets/img/PetStoreShop.ico" />
     <link rel="stylesheet" href="../assets/img/estilosindex.css" />
   </head>
-
-  </body>
-
-  <!-- header común -->
-  <header>
-    <h1>Droopy Pet Shop</h1>
-    <nav>
-      <ul>
-        <li><a href="../index.html">Inicio</a></li>
-        <li><a href="./productos.html">Productos</a></li>
-      </ul>
-      <div id="cart" class="cart"></div>
-    </nav>
-  </header>
-   <main>
-    <div class="TuCarrito">
-       <h2>Tu carrito</h2>
-       <div class="tablaCarrito">
-
-        <div class="listaCarrito" id="listaCarrito">
-          <div id="cabeceraCarrito">
-            <span>Producto</span>
-            <span>Precio</span>
-            <span>Cantidad</span>
-            <span>Subtotal</span>
+  <body>
+    <!-- header común -->
+    <header>
+      <h1>Droopy Pet Shop</h1>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="./productos.html">Productos</a></li>
+        </ul>
+        <div id="cart" class="cart"></div>
+      </nav>
+    </header>
+    <main>
+      <div class="TuCarrito">
+        <h2>Tu carrito</h2>
+        <div class="tablaCarrito">
+          <div class="listaCarrito" id="listaCarrito">
+            <div id="cabeceraCarrito">
+              <span>Producto</span>
+              <span>Precio</span>
+              <span>Cantidad</span>
+              <span>Subtotal</span>
+            </div>
+            <div id="carritoProductos"></div>
           </div>
-          <div id="carritoProductos"></div>
+
+          <!-- resumen del carrito -->
+          <div class="resumenCarrito" id="resumenCarrito"></div>
         </div>
-
-        <!-- resumen del carrito -->
-        <div class="resumenCarrito" id="resumenCarrito"></div>
-
       </div>
-   </div>
-
     </main>
     <!-- footer común -->
     <footer>
@@ -51,4 +46,3 @@
     <script type="module" src="../js/carrito.js"></script>
   </body>
 </html>
-

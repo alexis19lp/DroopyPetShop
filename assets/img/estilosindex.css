@@ -28,8 +28,8 @@ main {
 
 #saludo {
   justify-self: center;
-  width: 80%; 
-  text-align: center; 
+  width: 80%;
+  text-align: center;
 }
 
 footer {
@@ -66,7 +66,8 @@ main section {
   margin-bottom: 20px;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: "Roboto Slab", serif;
 }
 
@@ -90,7 +91,7 @@ p {
   padding: 15px;
   background-color: #f9f9f9;
   width: 220px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .card {
@@ -99,7 +100,7 @@ p {
   box-shadow: 0px 4px 8px #333;
   margin-top: 10px;
   border-radius: 10px;
-  
+
   display: flex;
   flex-direction: column;
   align-items: center; /* centra horizontalmente los hijos, como la imagen */
@@ -124,15 +125,14 @@ p {
 }
 
 .btn-agregar:disabled {
-  background-color:burlywood
+  background-color: burlywood;
 }
 
-.btn-detalle{
+.btn-detalle {
   background-color: cornflowerblue;
   padding: 5px 5px;
   border-radius: 6px;
   color: white;
-
 }
 
 .btn-detalle:hover {
@@ -145,7 +145,7 @@ p {
 }
 
 .listaCarrito {
-    padding: 10px 10px;
+  padding: 10px 10px;
   border-radius: 5px;
   box-shadow: 0px 4px 8px #333;
   background-color: white;
@@ -166,49 +166,179 @@ p {
 }
 
 .cart-link {
-  position: relative;        /* permite posicionar elementos hijos (como el badge) relativos a este link */
-  display: inline-flex;      /* se comporta como inline, pero usa flexbox para alinear su contenido */
-  align-items: center;       /* centra verticalmente el ícono del carrito y el número */
-  gap: .4rem;                /* espacio horizontal entre el ícono y el badge */
-  margin-left: auto;         /* truco de flexbox: empuja el carrito a la derecha del nav */
-  text-decoration: none;     /* quita el subrayado de enlace */
+  position: relative; /* permite posicionar elementos hijos (como el badge) relativos a este link */
+  display: inline-flex; /* se comporta como inline, pero usa flexbox para alinear su contenido */
+  align-items: center; /* centra verticalmente el ícono del carrito y el número */
+  gap: 0.4rem; /* espacio horizontal entre el ícono y el badge */
+  margin-left: auto; /* truco de flexbox: empuja el carrito a la derecha del nav */
+  text-decoration: none; /* quita el subrayado de enlace */
 }
 
 /* ---- Contenedor del ícono (SVG del carrito) ---- */
-.cart-ico { 
-  display: inline-flex;      /* mantiene el ícono alineado en línea con el número */
+.cart-ico {
+  display: inline-flex; /* mantiene el ícono alineado en línea con el número */
 }
 
 /* ---- El badge (numerito rojo con cantidad) ---- */
 .cart-badge {
-  min-width: 20px;           /* ancho mínimo: asegura que siempre tenga forma de círculo */
-  height: 20px;              /* alto fijo: mantiene la altura consistente */
-  padding: 0 6px;            /* espacio horizontal extra: si hay 2 o 3 dígitos, no se aprieta */
-  border-radius: 999px;      /* valor enorme → genera forma circular/píldora */
-  font-size: 12px;           /* tamaño del número */
-  line-height: 20px;         /* centra verticalmente el número dentro del círculo */
-  text-align: center;        /* centra horizontalmente el número */
-  background: #e11d48;       /* color de fondo rojo */
-  color: #fff;               /* texto en blanco */
-  font-weight: 700;          /* número en negrita para que se note más */
-  display: inline-block;     /* se comporta como caja en línea */
+  min-width: 20px; /* ancho mínimo: asegura que siempre tenga forma de círculo */
+  height: 20px; /* alto fijo: mantiene la altura consistente */
+  padding: 0 6px; /* espacio horizontal extra: si hay 2 o 3 dígitos, no se aprieta */
+  border-radius: 999px; /* valor enorme → genera forma circular/píldora */
+  font-size: 12px; /* tamaño del número */
+  line-height: 20px; /* centra verticalmente el número dentro del círculo */
+  text-align: center; /* centra horizontalmente el número */
+  background: #e11d48; /* color de fondo rojo */
+  color: #fff; /* texto en blanco */
+  font-weight: 700; /* número en negrita para que se note más */
+  display: inline-block; /* se comporta como caja en línea */
 }
 
 /* ---- Cuando el badge recibe la clase .bump, corre la animación ---- */
 .cart-badge.bump {
-  animation: cart-bump 500ms ease-out; 
+  animation: cart-bump 500ms ease-out;
   /* usa la animación "cart-bump"
      - dura medio segundo (500ms)
      - arranca fuerte y termina suave (ease-out) */
 }
 
-/* ---- Pasos de la animación del rebote ---- */ 
+/* ---- Pasos de la animación del rebote ---- */
 /* los porcentajes representan en qué momento de la animación se aplica cada estilo.*/
 @keyframes cart-bump {
-  0%   { transform: scale(1); }     /* arranca en tamaño normal */
-  20%  { transform: scale(1.35); }  /* se infla bastante (35% más grande) */
-  40%  { transform: scale(0.8); }   /* se achica más de lo normal (rebote hacia abajo) */
-  60%  { transform: scale(1.2); }   /* rebote hacia arriba, no tan fuerte como el inicial */
-  80%  { transform: scale(0.9); }   /* segundo rebote hacia abajo más suave */
-  100% { transform: scale(1); }     /* vuelve al tamaño normal */
+  0% {
+    transform: scale(1);
+  } /* arranca en tamaño normal */
+  20% {
+    transform: scale(1.35);
+  } /* se infla bastante (35% más grande) */
+  40% {
+    transform: scale(0.8);
+  } /* se achica más de lo normal (rebote hacia abajo) */
+  60% {
+    transform: scale(1.2);
+  } /* rebote hacia arriba, no tan fuerte como el inicial */
+  80% {
+    transform: scale(0.9);
+  } /* segundo rebote hacia abajo más suave */
+  100% {
+    transform: scale(1);
+  } /* vuelve al tamaño normal */
+}
+
+/* ---- Estilos del carrito ---- */
+.TuCarrito {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tablaCarrito {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.listaCarrito {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+#cabeceraCarrito {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 15px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #e9ecef;
+  font-weight: bold;
+  color: #495057;
+}
+
+.filaCarrito {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e9ecef;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.filaCarrito:hover {
+  background-color: #f8f9fa;
+}
+
+.filaCarrito:last-child {
+  border-bottom: none;
+}
+
+.productoCarrito {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.productoCarrito img {
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.infoProducto {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nombreProducto {
+  font-weight: 500;
+  color: #212529;
+  font-size: 14px;
+}
+
+.idProducto {
+  font-size: 12px;
+  color: #6c757d;
+}
+
+.precioCarrito,
+.cantidadCarrito,
+.subtotalCarrito {
+  text-align: center;
+  font-weight: 500;
+  color: #495057;
+}
+
+.subtotalCarrito {
+  font-weight: bold;
+}
+
+.resumenCarrito {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  height: fit-content;
+}
+
+.resumenCarrito h2 {
+  margin-bottom: 15px;
+  color: #495057;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
+}
+
+.resumenCarrito p {
+  margin-bottom: 10px;
+  color: #6c757d;
+}
+
+.resumenCarrito .btn-agregar {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
 }

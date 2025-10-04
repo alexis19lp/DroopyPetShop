@@ -41,21 +41,23 @@ function renderCarrito() {
   // Renderizar productos agrupados
   productosAgrupados.forEach((producto) => {
     contenedorCarrito.innerHTML += `
-      <div class="productoCarrito">
-      <img src="${producto.img}" alt="Imagen producto" width="50">
-      <span>${producto.nombre}</span>
-      <span>ID: ${producto.id}</span>
-
-      </div>
-      <div class="precioCarrito">
-        <span>${producto.precio}</span>
-      </div>
-      <div class="cantidadCarrito">
-        <span>${producto.cantidad}</span>
-      </div>
-      <div class="subtotalCarrito">
-        <span>${producto.precio * producto.cantidad}</span>
-      </div>
+      <div class="filaCarrito">
+        <div class="productoCarrito">
+          <img src="${producto.img}" alt="Imagen producto" width="50">
+          <div class="infoProducto">
+            <span class="nombreProducto">${producto.nombre}</span>
+            <span class="idProducto">ID: ${producto.id}</span>
+          </div>
+        </div>
+        <div class="precioCarrito">
+          <span>$${producto.precio}</span>
+        </div>
+        <div class="cantidadCarrito">
+          <span>${producto.cantidad}</span>
+        </div>
+        <div class="subtotalCarrito">
+          <span>$${producto.precio * producto.cantidad}</span>
+        </div>
       </div>
     `;
   });
