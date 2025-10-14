@@ -81,7 +81,7 @@ function renderResumen() {
     <h2>Resumen</h2>
     <p>Total de productos: ${totalProductos}</p>
     <p>Total de precio: ${totalPrecio}</p>
-    <button class="btn-agregar">Seguir comprando</button>
+    <button aria-label="Seguir comprando" class="btn-agregar">Seguir comprando</button>
   `;
 
   const btnSeguirComprando = contenedorResumen.querySelector("button");
