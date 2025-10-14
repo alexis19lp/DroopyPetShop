@@ -17,7 +17,7 @@ function renderProductos(lista) {
       <h3 class="card-title">${prod.nombre}</h3>
       <p class="card-desc">${prod.descripcion}</p>
       <p class="card-price">$${prod.precio}</p>
-      <button class="btn-detalle" data-id="${prod.id}">Ver detalles</button>
+      <button aria-label="Ver detalles" class="btn-detalle" data-id="${prod.id}">Ver detalles</button>
     `;
 
     contenedorCatalogo.appendChild(card);

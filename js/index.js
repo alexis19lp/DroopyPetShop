@@ -31,7 +31,7 @@ function renderProductos(lista) {
       <h3 class="card-title">${prod.nombre}</h3>
       <p class="card-desc">${prod.descripcion}</p>
       <p class="card-price">$${prod.precio}</p>
-      <button class="btn-agregar" ${
+      <button aria-label="Agregar al carrito ${stockDisponible < 1 ? " (Stock agotado)" : ""}" class="btn-agregar" ${
         stockDisponible < 1 ? "disabled" : ""
       }>Agregar al carrito ${
       stockDisponible < 1 ? " (Stock agotado)" : ""
