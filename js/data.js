@@ -6,8 +6,7 @@ export const productos = [
     categoria: "Accesorios",
     precio: 22000,
     stock: 7,
-    img:"../assets/img/id1.jpg",
-
+    img: "../assets/img/id1.jpg",
   },
 
   {
@@ -18,7 +17,6 @@ export const productos = [
     precio: 15000,
     stock: 15,
     img: "../assets/img/id2.jpg",
-
   },
 
   {
@@ -29,7 +27,6 @@ export const productos = [
     precio: 3500,
     stock: 25,
     img: "../assets/img/id3.jpg",
-
   },
 
   {
@@ -40,7 +37,6 @@ export const productos = [
     precio: 8000,
     stock: 12,
     img: "../assets/img/id4.jpg",
-
   },
 
   {
@@ -51,7 +47,6 @@ export const productos = [
     precio: 4200,
     stock: 20,
     img: "../assets/img/id5.jpg",
-
   },
 
   {
@@ -62,7 +57,6 @@ export const productos = [
     precio: 5600,
     stock: 18,
     img: "../assets/img/id6.jpg",
-
   },
 
   {
@@ -73,7 +67,6 @@ export const productos = [
     precio: 6900,
     stock: 10,
     img: "../assets/img/id7.jpg",
-
   },
 
   {
@@ -84,7 +77,5 @@ export const productos = [
     precio: 18500,
     stock: 14,
     img: "../assets/img/id8.webp",
-
   },
 ];
-
