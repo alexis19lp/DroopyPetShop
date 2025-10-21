@@ -60,10 +60,44 @@ nav a {
   font-weight: bold;
 }
 
+/* --- Botón hamburguesa --- */
+.hamburger {
+  display: none; /* oculto en desktop */
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  justify-content: center;
+  padding-left: 20px;
+}
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: white;
+}
+
 main section {
   display: grid;
   grid-template-columns: 1fr;
   margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .hamburger {
+    display: flex;
+  }
+  nav ul {
+    display: none; /* oculto por defecto */
+    flex-direction: column;
+  }
+  .cart-link {
+    margin-left: auto;
+  }
+}
+.nav-links.active {
+  display: flex; /* muestro el menú cuando tiene la clase .active */
 }
 
 h1,
