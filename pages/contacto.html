@@ -16,14 +16,24 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../assets/img/estilosindex.css" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
   </head>
 
   <body>
     <header>
       <h1>Droopy Pet Shop</h1>
       <nav>
+        <!-- Menu hamburguesa -->
+        <button class="hamburger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links">
+          <a href="../index.html">Inicio</a>
+          <a href="./productos.html">Productos</a>
+          <a href="./contacto.html">Contacto</a>
+        </div>
         <ul>
-          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="./index.html">Inicio</a></li>
           <li><a href="./productos.html">Productos</a></li>
           <li><a href="./contacto.html">Contacto</a></li>
         </ul>
@@ -42,9 +52,7 @@
           <div class="card">
             <div class="card-body">
               <div class="mb-3">
-                <label for="nombre" class="form-label"
-                  >Nombre</label
-                >
+                <label for="nombre" class="form-label">Nombre</label>
                 <input
                   id="nombre"
                   type="text"
@@ -54,9 +62,7 @@
                 />
               </div>
               <div class="mb-3">
-                <label for="email" class="form-label"
-                  >Correo electrónico</label
-                >
+                <label for="email" class="form-label">Correo electrónico</label>
                 <input
                   type="email"
                   class="form-control"
@@ -69,9 +75,7 @@
                 </div>
               </div>
               <div class="mb-3">
-                <label for="mensaje" class="form-label"
-                  >Mensaje</label
-                >
+                <label for="mensaje" class="form-label">Mensaje</label>
                 <textarea
                   class="form-control"
                   id="mensaje"
@@ -100,5 +104,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="../js/validacionContacto.js"></script>
+    <script type="module" src="../js/menu.js"></script>
   </body>
 </html>

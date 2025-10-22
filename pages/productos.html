@@ -3,22 +3,34 @@
   <head>
     <meta charset="utf-8" />
     <title>Productos | Droopy Pet Shop</title>
-    <meta name="description" content="Tienda online de articulos, alimentos para mascotas">
-    <meta name="keywords" content="mascotas, petshoop, cat, dog, perro, gato">
+    <meta
+      name="description"
+      content="Tienda online de articulos, alimentos para mascotas"
+    />
+    <meta name="keywords" content="mascotas, petshoop, cat, dog, perro, gato" />
     <link rel="icon" href="../assets/img/PetStoreShop.ico" />
     <link rel="stylesheet" href="../assets/img/estilosindex.css" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
   </head>
 
   <body>
-
     <!-- header común -->
     <header>
       <h1>Droopy Pet Shop</h1>
       <nav>
+        <!-- Menu hamburguesa -->
+        <button class="hamburger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links">
+          <a href="../index.html">Inicio</a>
+          <a href="./productos.html">Productos</a>
+          <a href="./contacto.html">Contacto</a>
+        </div>
         <ul>
-          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="./index.html">Inicio</a></li>
           <li><a href="./productos.html">Productos</a></li>
-          <li><a href="./contacto.html">Contacto</a></li>     
+          <li><a href="./contacto.html">Contacto</a></li>
         </ul>
         <div id="cart" class="cart"></div>
       </nav>
@@ -43,6 +55,6 @@
 
     <script type="module" src="../js/catalogo.js"></script>
     <script type="module" src="../js/carrito.js"></script>
+    <script type="module" src="../js/menu.js"></script>
   </body>
-  
 </html>
