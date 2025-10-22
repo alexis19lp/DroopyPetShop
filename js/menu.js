@@ -1,4 +1,6 @@
-const hamburger = document.querySelector(".hamburger");
+document.addEventListener("DOMContentLoaded", () => {
+  // menú hamburguesa
+  const hamburger = document.querySelector(".hamburger");
   const navLinks = document.querySelector(".nav-links");
 
   hamburger.addEventListener("click", () => {
@@ -6,3 +8,4 @@ const hamburger = document.querySelector(".hamburger");
     const expanded = hamburger.getAttribute("aria-expanded") === "true";
     hamburger.setAttribute("aria-expanded", !expanded);
   });
+});

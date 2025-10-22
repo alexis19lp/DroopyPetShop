@@ -78,6 +78,25 @@ nav a {
   background: white;
 }
 
+/* --- Links del menú --- */
+.nav-links {
+  display: none;
+  gap: 20px;
+}
+.nav-links.active {
+  display: block;
+  position: absolute;
+  top: 127px;
+  left: 0;
+  right: 0;
+  background: #004d99;
+  padding: 15px;
+}
+.nav-links.active a {
+  display: block;
+  padding: 10px 0;
+}
+
 main section {
   display: grid;
   grid-template-columns: 1fr;
@@ -92,6 +111,12 @@ main section {
     display: none; /* oculto por defecto */
     flex-direction: column;
   }
+
+  .nav-links {
+    display: none; /* oculto por defecto */
+    flex-direction: column;
+  }
+
   .cart-link {
     margin-left: auto;
   }
