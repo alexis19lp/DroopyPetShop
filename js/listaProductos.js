@@ -21,14 +21,12 @@ async function iniciarApp() {
     // 7. 'await' pausa de nuevo hasta que los datos se conviertan de JSON
     const productos = await respuesta.json();
 
-    // 8. ¡ÉXITO! 'productos' es tu array.
+    // 8. 'productos' es nuestro array.
     // Ahora podemos llamar a las funciones que dependen de esta data.
     console.log("Productos cargados:", productos);
 
-    // 👇 AQUÍ LLAMAS A TUS OTRAS FUNCIONES 👇
     mostrarProductosEnLaPagina(productos);
     inicializarLogicaDelCarrito(productos);
-    // ...etcétera...
   } catch (error) {
     // 9. Si algo en el 'try' falla (el fetch, la conversión a JSON, o el 'throw'),
     // se ejecutará este 'catch' y nos mostrará el error en la consola.
@@ -36,24 +34,20 @@ async function iniciarApp() {
   }
 }
 
-// --- TUS OTRAS FUNCIONES ---
-// (Estas funciones deben estar en este mismo archivo o importadas
-// si estás usando módulos para todo)
-
 /**
  * Función que toma el array de productos y los muestra en el HTML.
  */
 function mostrarProductosEnLaPagina(productos) {
   console.log("Mostrando productos...");
-  const contenedor = document.getElementById("gridProductos"); // Asegúrate de tener este ID en tu HTML
+  const contenedor = document.getElementById("gridProductos");
 
   // Limpiamos el contenedor por si acaso
   contenedor.innerHTML = "";
 
   productos.forEach((producto) => {
-    // Aquí va tu lógica para crear la tarjeta de cada producto
+    // La lógica para crear la tarjeta de cada producto
     const divProducto = document.createElement("div");
-    divProducto.classList.add("tarjeta-producto"); // Agrégale tus clases CSS
+    divProducto.classList.add("tarjeta-producto");
     divProducto.innerHTML = `
       <img src="${producto.img}" alt="${producto.nombre}">
       <h3>${producto.nombre}</h3>
@@ -69,7 +63,4 @@ function mostrarProductosEnLaPagina(productos) {
  */
 function inicializarLogicaDelCarrito(productos) {
   console.log("Inicializando carrito...");
-  // ...toda tu lógica del carrito...
-  // Por ejemplo, aquí pondrías los 'addEventListener' a los botones "Agregar al carrito"
-  // que ahora ya existen gracias a mostrarProductosEnLaPagina().
 }

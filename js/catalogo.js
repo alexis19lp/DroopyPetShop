@@ -13,10 +13,6 @@ async function iniciarCatalogo() {
     }
     const productos = await respuesta.json(); // <-- ¡Aquí están tus productos!
 
-    // ================================================================
-    // ▼ INICIO DE TU LÓGICA ORIGINAL (MOVIDA AQUÍ DENTRO) ▼
-    // ================================================================
-
     // Seleccionar el contenedor principal
     const contenedorCatalogo = document.getElementById("gridProductos");
     const contenedorFiltros = document.getElementById("filtroCategoria");
@@ -30,7 +26,6 @@ async function iniciarCatalogo() {
     }
 
     // Renderizar productos
-    // (Esta función no depende de 'productos' directamente, pero es llamada por las que sí)
     function renderProductos(lista) {
       contenedorCatalogo.innerHTML = " ";
       lista.forEach((prod) => {
@@ -58,7 +53,6 @@ async function iniciarCatalogo() {
     }
 
     // 4. Renderizar filtros dinámicos según las categorías
-    // (Esta función SÍ depende de 'productos')
     function renderFiltros() {
       // Obtener categorías únicas (usando 'productos' que vino del fetch)
       const categorias = [...new Set(productos.map((p) => p.categoria))];
@@ -87,7 +81,6 @@ async function iniciarCatalogo() {
         if (categoria === "Todos") {
           renderProductos(productos); // Usa 'productos' del fetch
         } else {
-          // Usa 'productos' del fetch
           const filtrados = productos.filter((p) => p.categoria === categoria);
           renderProductos(filtrados);
         }
@@ -95,7 +88,6 @@ async function iniciarCatalogo() {
     }
 
     // 5. Inicialización
-    // (Esta función SÍ depende de 'productos' y 'renderFiltros')
     function inicializarCatalogo() {
       renderFiltros(); // Llama a la función que usa 'productos'
 
@@ -118,12 +110,8 @@ async function iniciarCatalogo() {
       }
     }
 
-    // 6. Inicialización (Esta es la llamada a TU función)
+    // 6. Inicialización de catálogo
     inicializarCatalogo();
-
-    // ================================================================
-    // ▲ FIN DE TU LÓGICA ORIGINAL ▲
-    // ================================================================
   } catch (error) {
     // 7. Manejo de cualquier error que ocurra
     console.error("Error al cargar el catálogo:", error);

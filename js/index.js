@@ -1,12 +1,9 @@
-// 1. Tus imports de 'carrito.js' se mantienen igual.
-// Siguen siendo necesarios para la lógica del carrito.
+// 1. IMPORTAMOS las funciones necesarias
 import {
   guardarEnCarritoLocalStorage,
   updateBadge,
   recuperaCarritoDelLocalStorage,
 } from "./carrito.js";
-
-// --- (Aquí estaba el 'import { productos }...' que borramos) ---
 
 // 2. CREAMOS el nuevo punto de entrada
 document.addEventListener("DOMContentLoaded", () => {
@@ -21,16 +18,10 @@ async function iniciarIndex() {
     if (!respuesta.ok) {
       throw new Error(`Error HTTP: ${respuesta.status}`);
     }
-    const productos = await respuesta.json(); // <-- ¡Aquí están tus productos!
+    const productos = await respuesta.json();
 
-    // ================================================================
-    // ▼ INICIO DE TU LÓGICA ORIGINAL (MOVIDA AQUÍ DENTRO) ▼
-    // ================================================================
-
-    // Ahora que 'productos' existe, podemos ejecutar esta línea
     const productosDestacados = productos.slice(0, 3);
 
-    // Selecciona el contenedor (es mejor hacerlo aquí)
     const contenedorDestacados = document.getElementById("destacados");
 
     // Si el contenedor no existe, salimos para evitar errores
@@ -39,7 +30,7 @@ async function iniciarIndex() {
       return;
     }
 
-    // Definimos tu función auxiliar (ahora dentro de iniciarIndex)
+    // Definimos la función auxiliar
     const calcularStockDisponible = (producto) => {
       const carrito = recuperaCarritoDelLocalStorage();
       const cantidadEnCarrito = carrito.filter(
@@ -48,7 +39,7 @@ async function iniciarIndex() {
       return producto.stock - cantidadEnCarrito;
     };
 
-    // Definimos tu función de renderizado (ahora dentro de iniciarIndex)
+    // Definimos la función de renderizado
     function renderProductos(lista) {
       lista.forEach((prod) => {
         // Calcular stock disponible
@@ -78,17 +69,12 @@ async function iniciarIndex() {
           updateBadge(recuperaCarritoDelLocalStorage().length, true);
         });
 
-        // Ahora 'contenedorDestacados' existe y se puede usar
         contenedorDestacados.appendChild(card);
       });
     }
 
-    // 5. Llama a la función (esto estaba al final de tu archivo)
+    // 5. Llama a la función
     renderProductos(productosDestacados);
-
-    // ================================================================
-    // ▲ FIN DE TU LÓGICA ORIGINAL ▲
-    // ================================================================
   } catch (error) {
     // 6. Manejo de cualquier error que ocurra
     console.error("Error al cargar la página de inicio:", error);

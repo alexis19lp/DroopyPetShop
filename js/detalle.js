@@ -23,15 +23,11 @@ async function iniciarDetalle() {
     }
     const productos = await respuesta.json(); // <-- ¡Aquí están tus productos!
 
-    // ================================================================
-    // ▼ INICIO DE TU LÓGICA ORIGINAL (MOVIDA AQUÍ DENTRO) ▼
-    // ================================================================
-
     // Obtiene el parámetro id desde la URL
     const params = new URLSearchParams(window.location.search);
     const id = parseInt(params.get("id"));
 
-    // Busca el producto en el array (ahora 'productos' existe)
+    // Busca el producto en el array
     let producto = productos.find((p) => p.id === id);
 
     // Selecciona el contenedor del detalle
@@ -44,7 +40,6 @@ async function iniciarDetalle() {
     }
 
     // Función para renderizar el detalle
-    // (La definimos aquí para que tenga acceso a 'producto')
     function renderDetalle() {
       if (!producto) {
         contenedorDetalle.innerHTML = "<p>Producto no encontrado.</p>";
@@ -101,12 +96,8 @@ async function iniciarDetalle() {
       }
     }
 
-    // 6. Inicializa (Esta es la llamada a TU función)
+    // 6. Inicializa el detalle
     renderDetalle();
-
-    // ================================================================
-    // ▲ FIN DE TU LÓGICA ORIGINAL ▲
-    // ================================================================
   } catch (error) {
     // 7. Manejo de cualquier error que ocurra
     console.error("Error al cargar el detalle del producto:", error);
