@@ -1,47 +1,78 @@
-// funcion para guardar el elemento en el localStorage
-export function guardarEnCarritoLocalStorage(valor) {
+/*
+================================================================
+FUNCIONES DE DATOS (LOGICA DEL CARRITO)
+================================================================
+*/
+
+export function agregarAlCarrito(producto) {
   const carrito = recuperaCarritoDelLocalStorage() || [];
-  carrito.push(valor);
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-  console.log("Guardado en Carrito Local Storage:", valor);
+
+  // Buscamos si el producto ya existe en el carrito
+  const productoExistente = carrito.find((item) => item.id === producto.id);
+
+  if (productoExistente) {
+    // Si existe, solo incrementamos la cantidad
+    productoExistente.cantidad++;
+  } else {
+    // Si no existe, lo agregamos con cantidad 1
+    carrito.push({ ...producto, cantidad: 1 });
+  }
+
+  // Guardamos el carrito actualizado
+  guardarCarritoEnLocalStorage(carrito);
+  console.log("Producto agregado/actualizado en Carrito:", carrito);
+
+  // Actualizamos el badge
+  updateBadge();
 }
 
-// funcion para recuperar carrito del localStorage
+/**
+ * Función para guardar el array COMPLETO en localStorage
+ */
+function guardarCarritoEnLocalStorage(carrito) {
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  // Cada vez que guardamos, actualizamos el badge
+  updateBadge();
+}
+
+/**
+ * Función para recuperar carrito del localStorage.
+ * Es exportada porque la usamos en agregarAlCarrito.
+ */
 export function recuperaCarritoDelLocalStorage() {
   const carrito = localStorage.getItem("carrito");
   return carrito ? JSON.parse(carrito) : [];
 }
 
-// Selecciona contenedor donde se va a mostar el listado del carrito.
-const contenedorCarrito = document.getElementById("carritoProductos");
+/*
+================================================================
+FUNCIONES DE RENDERIZADO (PINTAR EN EL HTML)
+================================================================
+*/
 
-// Renderiza el listado del carrito del localStorage
+// Selecciona contenedores (sin cambios)
+const contenedorCarrito = document.getElementById("carritoProductos");
+const contenedorResumen = document.getElementById("resumenCarrito");
+
+/**
+ * Renderiza el listado del carrito del localStorage
+ */
 function renderCarrito() {
   const carrito = recuperaCarritoDelLocalStorage();
+
   if (!contenedorCarrito) return;
+
+  contenedorCarrito.innerHTML = "";
 
   if (carrito.length === 0) {
     contenedorCarrito.innerHTML = "<p>El carrito está vacío.</p>";
     return;
   }
 
-  // Agrupar productos por ID y calcular cantidades usando Map
-  const productosAgrupados = new Map();
   carrito.forEach((producto) => {
-    if (productosAgrupados.has(producto.id)) {
-      productosAgrupados.get(producto.id).cantidad++;
-    } else {
-      productosAgrupados.set(producto.id, {
-        ...producto,
-        cantidad: 1,
-      });
-    }
-  });
-
-  // Renderizar productos agrupados
-  productosAgrupados.forEach((producto) => {
     contenedorCarrito.innerHTML += `
       <div class="filaCarrito">
+        
         <div class="productoCarrito">
           <img src="${producto.img}" alt="${producto.nombre}" width="50">
           <div class="infoProducto">
@@ -49,51 +80,102 @@ function renderCarrito() {
             <span class="idProducto">ID: ${producto.id}</span>
           </div>
         </div>
+        
         <div class="precioCarrito">
           <span>$${producto.precio}</span>
         </div>
+        
         <div class="cantidadCarrito">
-          <span>${producto.cantidad}</span>
+          <input 
+            type="number" 
+            class="form-control form-control-sm input-cantidad" 
+            value="${producto.cantidad}" 
+            min="1" 
+            data-id="${producto.id}"
+            style="width: 70px;"
+          >
         </div>
+        
         <div class="subtotalCarrito">
           <span>$${producto.precio * producto.cantidad}</span>
         </div>
+
+        <div class="eliminarCarrito">
+          <button 
+            class="btn btn-danger btn-sm btn-eliminar" 
+            data-id="${producto.id}"
+            aria-label="Eliminar producto"
+          >
+            &times; </button>
+        </div>
+
       </div>
     `;
   });
 }
 
-//// Selecciona contenedor donde se va a mostar el resumen del carrito.
-const contenedorResumen = document.getElementById("resumenCarrito");
-
-// Funcion para mostrar un resumen del carrito con un total de productos y un total de precio con un boton para seguir comprando.
+/**
+ * Muestra un resumen del carrito.
+ * Añade botón "Vaciar"
+ */
 function renderResumen() {
   const carrito = recuperaCarritoDelLocalStorage();
+
   if (!contenedorResumen) return;
 
-  const totalProductos = carrito.length;
-  const totalPrecio = carrito.reduce(
-    (total, producto) => total + producto.precio,
-    0
-  );
+  // ¡IMPORTANTE! Limpiamos el contenedor
+  contenedorResumen.innerHTML = "";
+
+  let totalProductos = 0;
+  let totalPrecio = 0;
+
+  if (carrito.length > 0) {
+    // Calculamos los totales basados en la nueva estructura
+    totalProductos = carrito.reduce(
+      (acc, producto) => acc + producto.cantidad,
+      0
+    );
+    totalPrecio = carrito.reduce(
+      (acc, producto) => acc + producto.precio * producto.cantidad,
+      0
+    );
+  }
 
   contenedorResumen.innerHTML = `
     <h2>Resumen</h2>
     <p>Total de productos: ${totalProductos}</p>
-    <p>Total de precio: ${totalPrecio}</p>
-    <button aria-label="Seguir comprando" class="btn-agregar">Seguir comprando</button>
+    <p>Total de precio: $${totalPrecio.toFixed(2)}</p>
+    <button aria-label="Seguir comprando" class="btn-agregar" id="btn-seguir-comprando">
+      Seguir comprando
+    </button>
+    <button aria-label="Vaciar carrito" class="btn btn-danger" id="btn-vaciar-carrito">
+      Vaciar Carrito
+    </button>
   `;
 
-  const btnSeguirComprando = contenedorResumen.querySelector("button");
-  btnSeguirComprando.addEventListener("click", () => {
-    window.location.href = "../pages/productos.html";
-  });
+  // Asignamos los listeners a los botones que acabamos de crear
+  document
+    .getElementById("btn-seguir-comprando")
+    .addEventListener("click", () => {
+      window.location.href = "../pages/productos.html";
+    });
+
+  // Listener para el nuevo botón
+  const btnVaciar = document.getElementById("btn-vaciar-carrito");
+  if (btnVaciar) {
+    btnVaciar.addEventListener("click", manejarVaciarCarrito);
+  }
 }
+
+/*
+===================================================
+BADGE DEL ICONO DEL CARRITO
+===================================================
+*/
 
 function ensureCartButton() {
   const nav = document.getElementById("cart");
   if (!nav) return;
-
   let link = nav.querySelector(".cart-link");
   if (!link) {
     link = document.createElement("a");
@@ -101,7 +183,6 @@ function ensureCartButton() {
     link.className = "cart-link";
     link.setAttribute("aria-label", "Carrito");
     link.innerHTML = `
-   
       <span class="cart-ico" aria-hidden="true">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
              xmlns="http://www.w3.org/2000/svg">
@@ -116,38 +197,142 @@ function ensureCartButton() {
   }
 }
 
-export function updateBadge(n, animate = true) {
-  // Buscamos el elemento con id="carritoCount" (el numerito rojo)
+/**
+ * Actualiza el número en el ícono del carrito.
+ * Es exportada porque se usa en agregarAlCarrito.
+ */
+export function updateBadge(animate = true) {
+  ensureCartButton(); // Aseguramos que el botón exista
   const badge = document.getElementById("carritoCount");
-
-  // Si no existe, salimos de la función para evitar errores
   if (!badge) return;
 
-  // Actualizamos el número que se muestra dentro del badge
-  badge.textContent = n;
+  const carrito = recuperaCarritoDelLocalStorage();
 
-  // Si queremos animar (por defecto es true)...
+  // Nueva lógica: sumamos las cantidades de cada producto
+  const totalProductos = carrito.reduce(
+    (acc, producto) => acc + producto.cantidad,
+    0
+  );
+
+  badge.textContent = totalProductos;
+
   if (animate) {
-    // 1) Quitamos la clase "bump" para “resetear” la animación
     badge.classList.remove("bump");
-
-    // 2) Leemos badge.offsetWidth
-    // El .offsetWidth es un truco para que el navegador se olvide de la animación pasada
-    // y la vuelva a correr cada vez que cambia el número.
-    badge.offsetWidth;
-
-    // 3) Volvemos a agregar la clase "bump"
-    //    Ahora el navegador cree que es la primera vez
-    //    y ejecuta la animación de nuevo
+    badge.offsetWidth; // Truco para forzar "reflow" y reiniciar la animación
     badge.classList.add("bump");
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  ensureCartButton();
-  renderCarrito();
-  renderResumen();
+/*
+================================================================
+MANEJADORES DE EVENTOS
+================================================================
+*/
+
+/**
+ * Maneja el cambio de cantidad desde el input.
+ */
+function manejarCambioCantidad(event) {
+  // Verificamos que el evento venga de nuestro input
+  if (!event.target.classList.contains("input-cantidad")) {
+    return;
+  }
+
+  const productoId = event.target.dataset.id;
+  const nuevaCantidad = parseInt(event.target.value);
+
+  if (nuevaCantidad < 1) {
+    event.target.value = 1; // Reseteamos a 1 si es inválido
+    return;
+  }
+
   const carrito = recuperaCarritoDelLocalStorage();
 
-  updateBadge(carrito.length, true);
+  // Buscamos el producto y actualizamos su cantidad
+  const carritoActualizado = carrito.map((producto) => {
+    if (producto.id == productoId) {
+      producto.cantidad = nuevaCantidad;
+    }
+    return producto;
+  });
+
+  // Guardamos, y volvemos a renderizar TODO
+  guardarCarritoEnLocalStorage(carritoActualizado);
+  renderCarrito();
+  renderResumen();
+}
+
+/**
+ * Maneja el clic en el botón de eliminar producto.
+ */
+function manejarEliminarProducto(event) {
+  // Buscamos el botón más cercano que tenga la clase
+  const botonEliminar = event.target.closest(".btn-eliminar");
+
+  if (!botonEliminar) {
+    return;
+  }
+
+  const productoId = botonEliminar.dataset.id;
+
+  // Confirmación
+  if (!confirm("¿Quitar este producto del carrito?")) {
+    return;
+  }
+
+  const carrito = recuperaCarritoDelLocalStorage();
+
+  // Filtramos el array, quitando el producto
+  const carritoActualizado = carrito.filter(
+    (producto) => producto.id != productoId
+  );
+
+  // Guardamos y volvemos a renderizar TODO
+  guardarCarritoEnLocalStorage(carritoActualizado);
+  renderCarrito();
+  renderResumen();
+}
+
+/**
+ * Maneja el clic en el botón de vaciar carrito.
+ */
+function manejarVaciarCarrito() {
+  if (!confirm("¿Estás seguro de que quieres vaciar todo el carrito?")) {
+    return;
+  }
+
+  // Guardamos un array vacío
+  guardarCarritoEnLocalStorage([]);
+
+  // Volvemos a renderizar TODO
+  renderCarrito();
+  renderResumen();
+}
+
+/*
+================================================================
+INICIALIZACIÓN
+================================================================
+*/
+
+document.addEventListener("DOMContentLoaded", () => {
+  ensureCartButton();
+
+  // Solo renderizamos si estamos en la página del carrito
+  if (contenedorCarrito || contenedorResumen) {
+    renderCarrito();
+    renderResumen();
+  }
+
+  // Usamos delegación de eventos en el contenedor del carrito
+  // para los botones de editar y eliminar, ya que se crean dinámicamente.
+  if (contenedorCarrito) {
+    contenedorCarrito.addEventListener("change", manejarCambioCantidad);
+    contenedorCarrito.addEventListener("click", manejarEliminarProducto);
+  }
+
+  // El botón de vaciar se crea en renderResumen
+
+  // Actualizamos el badge al cargar la página
+  updateBadge(false); // false = no animar al cargar
 });

@@ -1,6 +1,6 @@
 // 1. Tus imports de 'carrito.js' se mantienen igual.
 import {
-  guardarEnCarritoLocalStorage,
+  agregarAlCarrito,
   updateBadge,
   recuperaCarritoDelLocalStorage,
 } from "./carrito.js";
@@ -82,7 +82,7 @@ async function iniciarDetalle() {
         btnCarrito.addEventListener("click", () => {
           if (stockDisponible > 0) {
             // Guardar en el carrito
-            guardarEnCarritoLocalStorage(producto);
+            agregarAlCarrito(producto);
 
             // Actualizar badge del carrito
             const carrito = recuperaCarritoDelLocalStorage();

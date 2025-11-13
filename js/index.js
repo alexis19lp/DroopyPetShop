@@ -1,6 +1,6 @@
 // 1. IMPORTAMOS las funciones necesarias
 import {
-  guardarEnCarritoLocalStorage,
+  agregarAlCarrito,
   updateBadge,
   recuperaCarritoDelLocalStorage,
 } from "./carrito.js";
@@ -65,7 +65,7 @@ async function iniciarIndex() {
         // boton para agregar al carrito
         const btnAgregar = card.querySelector(".btn-agregar");
         btnAgregar.addEventListener("click", () => {
-          guardarEnCarritoLocalStorage(prod);
+          agregarAlCarrito(prod);
           updateBadge(recuperaCarritoDelLocalStorage().length, true);
         });
 

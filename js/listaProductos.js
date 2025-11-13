@@ -1,3 +1,5 @@
+import { agregarAlCarrito } from "./carrito.js"; // (Verifica que la ruta sea correcta)
+
 // 1. Esperamos a que el HTML (DOM) se cargue completamente
 document.addEventListener("DOMContentLoaded", () => {
   // 2. Una vez cargado, llamamos a nuestra función principal
@@ -52,7 +54,9 @@ function mostrarProductosEnLaPagina(productos) {
       <img src="${producto.img}" alt="${producto.nombre}">
       <h3>${producto.nombre}</h3>
       <p>$${producto.precio}</p>
-      <button>Agregar al carrito</button>
+      <button class="btn-agregar-producto" data-id="${producto.id}">
+        Agregar al carrito
+      </button>
     `;
     contenedor.appendChild(divProducto);
   });
@@ -63,4 +67,30 @@ function mostrarProductosEnLaPagina(productos) {
  */
 function inicializarLogicaDelCarrito(productos) {
   console.log("Inicializando carrito...");
+
+  // 1. Seleccionamos TODOS los botones que creamos
+  const botonesAgregar = document.querySelectorAll(".btn-agregar-producto");
+
+  // 2. Recorremos cada botón
+  botonesAgregar.forEach((boton) => {
+    // 3. A cada botón, le añadimos un listener para el 'click'
+    boton.addEventListener("click", () => {
+      // 4. Cuando se hace clic, leemos el ID del 'data-id'
+      const idDelProducto = boton.dataset.id;
+
+      // 5. Buscamos el producto COMPLETO en nuestro array original
+      //    usando el ID que obtuvimos.
+      const productoParaAgregar = productos.find((p) => p.id == idDelProducto);
+
+      // 6. Si lo encontramos...
+      if (productoParaAgregar) {
+        // 7. ¡Llamamos a la función importada!
+        agregarAlCarrito(productoParaAgregar);
+
+        console.log(`'${productoParaAgregar.nombre}' agregado al carrito.`);
+      } else {
+        console.error("No se encontró el producto con ID:", idDelProducto);
+      }
+    });
+  });
 }
