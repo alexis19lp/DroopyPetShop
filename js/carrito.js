@@ -151,7 +151,10 @@ function renderResumen() {
     </button>
     ${
       carrito.length > 0
-        ? `<button aria-label="Vaciar carrito" class="btn-danger" id="btn-vaciar-carrito">
+        ? `<button aria-label="Finalizar compra" class="btn-agregar-compra" id="btn-finalizar-compra">
+      Finalizar compra
+    </button>
+    <button aria-label="Vaciar carrito" class="btn-danger" id="btn-vaciar-carrito">
       Vaciar Carrito
     </button>`
         : ""
@@ -164,6 +167,14 @@ function renderResumen() {
     .addEventListener("click", () => {
       window.location.href = "../pages/productos.html";
     });
+
+  // Listener para el botón de finalizar compra (solo si existe)
+  const btnFinalizar = document.getElementById("btn-finalizar-compra");
+  if (btnFinalizar) {
+    btnFinalizar.addEventListener("click", () => {
+      window.location.href = "../pages/finalizar-compra.html";
+    });
+  }
 
   // Listener para el nuevo botón (solo si existe)
   const btnVaciar = document.getElementById("btn-vaciar-carrito");
