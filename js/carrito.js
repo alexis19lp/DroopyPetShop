@@ -65,7 +65,8 @@ function renderCarrito() {
   contenedorCarrito.innerHTML = "";
 
   if (carrito.length === 0) {
-    contenedorCarrito.innerHTML = "<p>El carrito está vacío.</p>";
+    contenedorCarrito.innerHTML =
+      "<p class='mensaje-carrito-vacio'>El carrito está vacío.</p>";
     return;
   }
 
@@ -148,9 +149,13 @@ function renderResumen() {
     <button aria-label="Seguir comprando" class="btn-agregar" id="btn-seguir-comprando">
       Seguir comprando
     </button>
-    <button aria-label="Vaciar carrito" class="btn btn-danger" id="btn-vaciar-carrito">
+    ${
+      carrito.length > 0
+        ? `<button aria-label="Vaciar carrito" class="btn-danger" id="btn-vaciar-carrito">
       Vaciar Carrito
-    </button>
+    </button>`
+        : ""
+    }
   `;
 
   // Asignamos los listeners a los botones que acabamos de crear
@@ -160,7 +165,7 @@ function renderResumen() {
       window.location.href = "../pages/productos.html";
     });
 
-  // Listener para el nuevo botón
+  // Listener para el nuevo botón (solo si existe)
   const btnVaciar = document.getElementById("btn-vaciar-carrito");
   if (btnVaciar) {
     btnVaciar.addEventListener("click", manejarVaciarCarrito);

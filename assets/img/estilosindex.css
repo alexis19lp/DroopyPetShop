@@ -199,6 +199,21 @@ p {
   background-color: blue;
 }
 
+.btn-danger {
+  background-color: red;
+  border-radius: 6px;
+  color: white;
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn-danger:hover {
+  background-color: darkred;
+}
+
 .tablaCarrito {
   display: flex;
   padding: 10px 10px;
@@ -498,4 +513,17 @@ p {
   .resumenCarrito {
     height: auto; /* Quitamos la altura fija */
   }
+}
+
+/* ---- Estilos para el mensaje de carrito vacío ---- */
+.mensaje-carrito-vacio {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 18px;
+  color: #6c757d;
+  font-weight: 500;
+  font-style: italic;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin: 20px 0;
 }
