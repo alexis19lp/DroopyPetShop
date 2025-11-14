@@ -308,7 +308,8 @@ p {
 
 #cabeceraCarrito {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  /* CAMBIO: Añadimos 'auto' al final para la 5ª columna */
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
   gap: 10px;
   padding: 15px 20px;
   background-color: #f8f9fa;
@@ -319,12 +320,18 @@ p {
 
 .filaCarrito {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  /*Añadimos 'auto' al final para la 5ª columna */
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
   gap: 10px;
   padding: 15px 20px;
   border-bottom: 1px solid #e9ecef;
   align-items: center;
   transition: background-color 0.2s ease;
+}
+
+/* Añade esto para alinear el botón de eliminar que pusimos en el JS */
+.eliminarCarrito {
+  text-align: center;
 }
 
 .filaCarrito:hover {
@@ -401,4 +408,94 @@ p {
   padding: 12px;
   font-size: 16px;
   font-weight: bold;
+}
+
+/*
+=====================================================
+  ESTILOS RESPONSIVE PARA EL CARRITO
+=====================================================
+*/
+@media (max-width: 768px) {
+  /* 1. Hacemos que la tabla y el resumen se apilen verticalmente */
+  .tablaCarrito {
+    grid-template-columns: 1fr; /* Una sola columna */
+    gap: 30px; /* Más separación vertical */
+  }
+
+  /* 2. Ocultamos la cabecera (Producto, Precio...) */
+  #cabeceraCarrito {
+    display: none;
+  }
+
+  /* 3. Convertimos cada fila en una "tarjeta" */
+  .filaCarrito {
+    display: block;
+    position: relative; /* Para posicionar el botón de eliminar */
+    padding: 15px;
+    /* Dejamos espacio arriba para el botón de eliminar */
+    padding-top: 50px;
+  }
+
+  /* 4. Posicionamos el botón de eliminar en la esquina */
+  .eliminarCarrito {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  /* 5. El bloque del producto ya se ve bien, solo le damos espacio */
+  .productoCarrito {
+    margin-bottom: 15px;
+  }
+  .productoCarrito img {
+    width: 60px; /* Un poco más grande para móvil */
+  }
+
+  /* 6. Acomodamos las otras "celdas" verticalmente 
+     Usamos flex para alinearlas (etiqueta a la izq, valor a la der) */
+  .precioCarrito,
+  .cantidadCarrito,
+  .subtotalCarrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    text-align: right; /* Alinea el valor a la derecha */
+  }
+
+  /* 7. Añadimos etiquetas con CSS 
+     ya que ocultamos la cabecera */
+
+  .precioCarrito::before {
+    content: "Precio:";
+    font-weight: 500;
+    color: #6c757d;
+    text-align: left;
+  }
+
+  .cantidadCarrito::before {
+    content: "Cantidad:";
+    font-weight: 500;
+    color: #6c757d;
+    text-align: left;
+  }
+
+  .subtotalCarrito::before {
+    content: "Subtotal:";
+    font-weight: bold; /* El subtotal es importante */
+    color: #212529;
+    text-align: left;
+  }
+
+  /* 8. Aseguramos que el input de cantidad tenga buen tamaño */
+  .cantidadCarrito .input-cantidad {
+    width: 70px;
+    padding: 5px 8px; /* Un poco más de padding para el dedo */
+  }
+
+  /* 9. Reseteamos el resumen para que ocupe todo el ancho */
+  .resumenCarrito {
+    height: auto; /* Quitamos la altura fija */
+  }
 }
