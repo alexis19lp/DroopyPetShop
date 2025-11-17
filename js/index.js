@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function iniciarIndex() {
   try {
     // 4. HACEMOS EL FETCH para obtener los productos
-    const respuesta = await fetch("assets/data/productos.json");
+    const respuesta = await fetch("./assets/data/productos.json");
     if (!respuesta.ok) {
       throw new Error(`Error HTTP: ${respuesta.status}`);
     }
