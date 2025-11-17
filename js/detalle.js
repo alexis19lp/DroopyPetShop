@@ -49,9 +49,10 @@ async function iniciarDetalle() {
       // Función para calcular el stock disponible
       const calcularStockDisponible = (producto) => {
         const carrito = recuperaCarritoDelLocalStorage();
-        const cantidadEnCarrito = carrito.filter(
-          (p) => p.id === producto.id
-        ).length;
+        const productoEnCarrito = carrito.find((p) => p.id === producto.id);
+        const cantidadEnCarrito = productoEnCarrito
+          ? productoEnCarrito.cantidad
+          : 0;
         return producto.stock - cantidadEnCarrito;
       };
 

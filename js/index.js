@@ -33,14 +33,15 @@ async function iniciarIndex() {
     // Definimos la función auxiliar
     const calcularStockDisponible = (producto) => {
       const carrito = recuperaCarritoDelLocalStorage();
-      const cantidadEnCarrito = carrito.filter(
-        (p) => p.id === producto.id
-      ).length;
+      const productoEnCarrito = carrito.find((p) => p.id === producto.id);
+      const cantidadEnCarrito = productoEnCarrito ? productoEnCarrito.cantidad : 0;
       return producto.stock - cantidadEnCarrito;
     };
 
     // Definimos la función de renderizado
     function renderProductos(lista) {
+      // Limpiar el contenedor antes de renderizar
+      contenedorDestacados.innerHTML = "";
       lista.forEach((prod) => {
         // Calcular stock disponible
         const stockDisponible = calcularStockDisponible(prod);
@@ -65,8 +66,12 @@ async function iniciarIndex() {
         // boton para agregar al carrito
         const btnAgregar = card.querySelector(".btn-agregar");
         btnAgregar.addEventListener("click", () => {
-          agregarAlCarrito(prod);
-          updateBadge(recuperaCarritoDelLocalStorage().length, true);
+          if (stockDisponible > 0) {
+            agregarAlCarrito(prod);
+            updateBadge(true);
+            // Re-renderizar para actualizar el stock disponible
+            renderProductos(productosDestacados);
+          }
         });
 
         contenedorDestacados.appendChild(card);
