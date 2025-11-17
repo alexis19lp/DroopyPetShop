@@ -165,14 +165,14 @@ function renderResumen() {
   document
     .getElementById("btn-seguir-comprando")
     .addEventListener("click", () => {
-      window.location.href = "../pages/productos.html";
+      window.location.href = "/DroopyPetShop/pages/productos.html";
     });
 
   // Listener para el botón de finalizar compra (solo si existe)
   const btnFinalizar = document.getElementById("btn-finalizar-compra");
   if (btnFinalizar) {
     btnFinalizar.addEventListener("click", () => {
-      window.location.href = "../pages/finalizar-compra.html";
+      window.location.href = "/DroopyPetShop/pages/finalizar-compra.html";
     });
   }
 
@@ -195,7 +195,7 @@ function ensureCartButton() {
   let link = nav.querySelector(".cart-link");
   if (!link) {
     link = document.createElement("a");
-    link.href = "../pages/carrito.html";
+    link.href = "/DroopyPetShop/pages/carrito.html";
     link.className = "cart-link";
     link.setAttribute("aria-label", "Carrito");
     link.innerHTML = `
